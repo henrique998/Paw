@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import * as Dialog from '@radix-ui/react-dialog'
 
 export const BlogHeader = styled.header`
     height: 4.375rem;
@@ -48,13 +49,6 @@ export const BlogHeaderContainer = styled.div`
 
         .profile {
             position: relative;
-
-            .profileBox-header {
-                position: absolute;
-
-                top: 3rem;
-                left: -100%;
-            }
         }
     }
 
@@ -111,17 +105,6 @@ export const BottomBarMenu = styled.nav`
                 object-fit: cover;
             }
         }
-
-        li.profile {
-            position: relative;
-
-            .profileBox-bottom-bar {
-                position: absolute;
-
-                bottom: 70px;
-                right: -50%;
-            }
-        }
     }
 
     @media (max-width: 424px) {
@@ -139,7 +122,7 @@ export const OptionContainer = styled.li<OptionContainerProps>`
     }
 `
 
-export const ProfileContainer = styled.div`
+export const ProfileContainer = styled(Dialog.Content)`
     width: 8.25rem;
     height: 7rem;
     padding: 0.875rem 0.75rem;
@@ -150,6 +133,22 @@ export const ProfileContainer = styled.div`
     display: grid;
     justify-content: center;
     gap: 0.5rem;
+`
+
+export const HeaderProfileContainer = styled(ProfileContainer)`
+    position: absolute;
+
+    top: 4rem;
+    right: 7rem;
+    z-index: 100;
+`
+
+export const BottomProfileContainer = styled(ProfileContainer)`
+    position: fixed;
+
+    bottom: 5rem;
+    right: 3rem;
+    z-index: 100;
 `
 
 export const LoggoutButton = styled.button`

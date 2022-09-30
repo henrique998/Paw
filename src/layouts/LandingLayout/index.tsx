@@ -1,16 +1,29 @@
 import Image from "next/image"
 import Link from "next/link"
-import { ReactNode } from "react"
+import { ReactNode, useState } from "react"
 import { Button } from "../../components/Button"
 import { NavLink } from "../../components/NavLink"
-import { ButtonsContainer, LandingHeader, LandingHeaderContainer, Nav } from "./styles"
-import { ToggleButton } from "./ToggleButton"
+import { Sidebar } from "./components/Sidebar"
+import { SignInModal } from "./components/SignInModal"
+import { SignUpModal } from "./components/SignUpModal"
+import { LandingHeader, LandingHeaderContainer, ModalsContainer, Nav } from "./styles"
+import { MenuButton } from "./MenuButton"
 
 interface LandingLayoutProps {
   children: ReactNode
 }
 
 export function LandingLayout({ children }: LandingLayoutProps) {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+
+  function handleOpenSidebar() {
+    setIsSidebarOpen(true)
+  }
+
+  function handleCloseSidebar() {
+    setIsSidebarOpen(false)
+  }
+
   return (
       <>
         <LandingHeader>
@@ -29,12 +42,14 @@ export function LandingLayout({ children }: LandingLayoutProps) {
               </ul>
             </Nav>
 
-            <ToggleButton />
+            <MenuButton onOpen={handleOpenSidebar} />
 
-            <ButtonsContainer>
-              <Button label="Entrar" variant="purple" />
-              <Button label="Criar conta" variant="white" />
-            </ButtonsContainer>
+            <ModalsContainer>
+              <SignInModal />
+              <SignUpModal />
+            </ModalsContainer>
+
+            <Sidebar isSidebarOpen={isSidebarOpen} onClose={handleCloseSidebar} />
           </LandingHeaderContainer>
         </LandingHeader>
 

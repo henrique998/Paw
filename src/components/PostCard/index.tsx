@@ -8,7 +8,7 @@ interface PostCardProps {
 
 export function PostCard({ className }: PostCardProps) {
     return (
-        <Link href="#" className={className}>
+        <Link href="/post/1989128jshdjsd" className={className}>
             <a>
                 <PostCardContainer>
                     <Image 

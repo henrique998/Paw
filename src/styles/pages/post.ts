@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const PostContainer = styled.main`
-
     > img {
         width: 100%;
         height: 31.25rem;
@@ -22,6 +21,8 @@ export const PostContainer = styled.main`
     }
 
     @media (max-width: 414px) {
+        padding-bottom: 3rem;
+
         > img {
             height: 13.75rem;
         }
@@ -135,4 +136,59 @@ export const MobileLikeButtonContainer = styled.div`
         align-items: center;
         justify-content: center;
     }
+`
+
+export const AuthorContainer = styled.div`
+    max-width: 74.375rem;
+    margin-top: 12.5rem;
+    margin-bottom: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 1rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+    h2 {
+        font-size: 2rem;
+        font-weight: 500;
+        color: ${props => props.theme["base-title"]};
+    }
+
+    img {
+        margin-top: 2.625rem;
+
+        width: 6.25rem;
+        height: 6.25rem;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    strong {
+        margin-top: 2.625rem;
+
+        font-size: 1.25rem;
+        font-weight: 500;
+
+        color: ${props => props.theme["base-title"]};
+    }
+
+    @media (max-width: 414px) {
+        margin-top: 4.5rem;
+
+        h2 {
+            font-size: 1.5rem;
+        }
+
+        img {
+            width: 4.25rem;
+            height: 4.25rem;
+        }
+
+        span {
+            margin-top: 1rem;
+        }
+    } 
 `

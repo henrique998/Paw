@@ -2,7 +2,7 @@ import Image from "next/future/image";
 import { Eye, Heart } from "phosphor-react";
 
 import { BlogLayout } from "../../layouts/BlogLayout";
-import { LikeButton, MobileLikeButtonContainer, PostContainer, PostContent, PostHeading } from "../../styles/pages/post";
+import { AuthorContainer, LikeButton, MobileLikeButtonContainer, PostContainer, PostContent, PostHeading } from "../../styles/pages/post";
 
 export default function Post() {
     return (
@@ -105,6 +105,19 @@ export default function Post() {
                         <Heart size={26} />
                     </LikeButton>
                 </MobileLikeButtonContainer>
+
+                <AuthorContainer>
+                    <h2>Escrito por</h2>
+
+                    <Image 
+                        src="/woman-02.png" 
+                        alt="" 
+                        width={300} 
+                        height={300} 
+                    />
+
+                    <strong>Luciana ferreira</strong>
+                </AuthorContainer>
             </PostContainer>
         </BlogLayout>
     )

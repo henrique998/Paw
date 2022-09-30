@@ -1,11 +1,15 @@
 import Link from "next/link"
 import Image from "next/future/image"
-import { ReactNode } from "react"
-import { Note, Star } from 'phosphor-react'
-import { NavLink } from "../../components/NavLink"
-import { BlogHeader, BlogHeaderContainer, BottomBarMenu, Nav, OptionContainer } from "./styles"
 import { useRouter } from "next/router"
-import { ProfileBox } from "./ProfileBox"
+import { ReactNode } from "react"
+import { Note, Star } from "phosphor-react"
+import * as Dialog from "@radix-ui/react-dialog";
+
+import { NavLink } from "../../components/NavLink"
+import { HeaderProfileBox } from "./components/HeaderProfileBox"
+
+import { BlogHeader, BlogHeaderContainer, BottomBarMenu, Nav, OptionContainer } from "./styles"
+import { BottomProfileBox } from "./components/BottomProfileBox"
 
 interface BlogLayoutProps {
     children: ReactNode
@@ -37,9 +41,18 @@ export function BlogLayout({ children }: BlogLayoutProps) {
                         <span>Olá, <strong>Rafaela</strong></span>
 
                         <div className="profile">
-                            <Image src="/woman-02.png" alt="" width={120} height={120} />
-
-                            {/* <ProfileBox className="profileBox-header" /> */}
+                            <Dialog.Root>
+                                <Dialog.Trigger>
+                                    <Image 
+                                        src="/woman-02.png" 
+                                        alt="" 
+                                        width={120} 
+                                        height={120} 
+                                    />
+                                </Dialog.Trigger>
+                                
+                                <HeaderProfileBox />
+                            </Dialog.Root>
                         </div> 
                     </div>
                 </BlogHeaderContainer>
@@ -71,15 +84,19 @@ export function BlogLayout({ children }: BlogLayoutProps) {
                         </Link>
                     </OptionContainer>
 
-                    <li className="profile">
-                        {/* <ProfileBox className="profileBox-bottom-bar" /> */}
+                    <li>
+                        <Dialog.Root>
+                            <BottomProfileBox />
 
-                        <Image 
-                            src="/woman-02.png" 
-                            alt="sua foto" 
-                            width={120} 
-                            height={120} 
-                        />
+                            <Dialog.Trigger>
+                                <Image 
+                                    src="/woman-02.png" 
+                                    alt="sua foto" 
+                                    width={120} 
+                                    height={120} 
+                                />
+                            </Dialog.Trigger>
+                        </Dialog.Root>
                     </li>
                 </ul>
             </BottomBarMenu>

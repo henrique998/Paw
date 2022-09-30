@@ -1,15 +1,19 @@
 import Image from "next/image";
-import { ToggleButtonContainer } from "./styles";
+import { MenuButtonContainer } from "./styles";
 
-export function ToggleButton() {
+interface MenuButtonProps {
+    onOpen: () => void
+}
+
+export function MenuButton({ onOpen }: MenuButtonProps) {
     return (
-        <ToggleButtonContainer>
+        <MenuButtonContainer onClick={onOpen}>
             <Image 
                 src="/Menu-Button.svg" 
                 alt="botão para abrir o menu mobile" 
                 width={24} 
                 height={24} 
             />
-        </ToggleButtonContainer>
+        </MenuButtonContainer>
     )
 }
