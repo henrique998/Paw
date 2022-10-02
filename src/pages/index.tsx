@@ -1,9 +1,28 @@
 import Image from "next/future/image";
+import { FormEvent, useState } from "react";
 import { Button } from "../components/Button";
 import { LandingLayout } from "../layouts/LandingLayout";
-import { HomeContainer, HomeHeading, NewsletterContainer, SubscribersCountContainer } from "../styles/pages/home";
+
+import { 
+  HomeContainer, 
+  HomeHeading, 
+  NewsletterContainer, 
+  SubscribersCountContainer 
+} from "../styles/pages/home";
 
 export default function Home() {
+  const [email, setEmail] = useState('')
+
+  function handleSubscribeInNewsletter(e: FormEvent) {
+    e.preventDefault()
+
+    if (email.trim() !== '') {
+      alert(email)
+    }
+
+    setEmail('')
+  }
+
   return (
     <LandingLayout>
       <HomeContainer>
@@ -43,8 +62,13 @@ export default function Home() {
           <NewsletterContainer>
             <span>Inscreva-se na nossa newsletter</span>
 
-            <form>
-              <input type="email" placeholder="Seu email" />
+            <form onSubmit={handleSubscribeInNewsletter}>
+              <input 
+                type="email" 
+                placeholder="Seu email"
+                onChange={e => setEmail(e.target.value)}
+                value={email} 
+              />
 
               <Button 
                 label="Inscrever-se" 
@@ -72,3 +96,4 @@ export default function Home() {
     </LandingLayout>
   )
 }
+

@@ -43,7 +43,6 @@ export const BlogHeaderContainer = styled.div`
             height: 2.5rem;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid ${props => props.theme["base-brand"]};
             cursor: pointer;
         }
 
@@ -101,7 +100,6 @@ export const BottomBarMenu = styled.nav`
                 width: 2.5rem;
                 height: 2.5rem;
                 border-radius: 50%;
-                border: 3px solid ${props => props.theme["base-brand"]};
                 object-fit: cover;
             }
         }
@@ -124,7 +122,6 @@ export const OptionContainer = styled.li<OptionContainerProps>`
 
 export const ProfileContainer = styled(Dialog.Content)`
     width: 8.25rem;
-    height: 7rem;
     padding: 0.875rem 0.75rem;
     border-radius: 8px;
     box-shadow: ${props => props.theme["base-shadow-1"]};

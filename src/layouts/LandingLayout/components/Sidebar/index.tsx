@@ -1,16 +1,22 @@
 import Link from "next/link";
 import Image from "next/future/image";
+import { useSession } from "next-auth/react"
 import { X } from "phosphor-react";
 import { NavLink } from "../../../../components/NavLink";
 import { Button } from "../../../../components/Button";
-import { ButtonsContainer, CloseButton, SidebarContainer, SidebarHeader, SidebarNav } from "./styles";
+import { AvatarContainer, ButtonsContainer, CloseButton, SidebarContainer, SidebarHeader, SidebarNav } from "./styles";
+import { HeaderProfile } from "../../../../components/HeaderProfile";
 
 interface SidebarProps {
     isSidebarOpen: boolean
-    onClose: () => void 
+    onClose: () => void
+    onOpenSignInModal: () => void
+    onOpenSignUpModal: () => void
 }
 
-export function Sidebar({ isSidebarOpen, onClose }: SidebarProps) {
+export function Sidebar({ isSidebarOpen, onClose, onOpenSignInModal, onOpenSignUpModal }: SidebarProps) {
+    const { status: sessionStatus, data: sessionData } = useSession()
+
     return (
         <SidebarContainer 
             animate={{
@@ -37,13 +43,30 @@ export function Sidebar({ isSidebarOpen, onClose }: SidebarProps) {
                     <NavLink path="/" label="Home" onClick={onClose} />
                     <NavLink path="/about" label="Sobre nós" onClick={onClose} />
                     <NavLink path="/categories" label="Categorias" onClick={onClose} />
+
+                    {sessionStatus === 'authenticated' && (
+                        <NavLink path="/last-posts" label="Últimos posts" onClick={onClose} />
+                    )}
                 </ul>
             </SidebarNav>
 
-            <ButtonsContainer>
-                <Button variant="purple" label="Entrar" />
-                <Button variant="white" label="Criar conta" />
-            </ButtonsContainer>
+            {sessionStatus === 'authenticated' ? (
+                <HeaderProfile />
+            ) : (
+                <ButtonsContainer>
+                    <Button 
+                        variant="purple" 
+                        label="Entrar" 
+                        onClick={() => onOpenSignInModal()} 
+                    />
+
+                    <Button 
+                        variant="white" 
+                        label="Criar conta" 
+                        onClick={onOpenSignUpModal} 
+                    />
+                </ButtonsContainer>
+            )}
         </SidebarContainer>
     )
 }

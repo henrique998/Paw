@@ -1,0 +1,18 @@
+query GetPost($slug: String!) {
+  post(where: {slug: $slug}) {
+    title
+    banner {
+      url
+    }
+    publishedAt
+    content {
+      html
+    }
+    author {
+      picture {
+        url
+      }
+      name
+    }
+  }
+}

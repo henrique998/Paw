@@ -1,12 +1,17 @@
 import * as Dialog from "@radix-ui/react-dialog";
+import { signIn } from "next-auth/react";
 import Image from "next/future/image";
 import { XCircle } from "phosphor-react";
 import { AuthOption, AuthOptionsContainer, Button, ModalContent, ModalDescription, ModalOverlay, ModalTitle, Separator } from "../styles";
 
+interface SignUpModalProps {
+    isModalOpen: boolean
+    onOpenChange: () => void
+}
 
-export function SignUpModal() {
+export function SignUpModal({ isModalOpen, onOpenChange }: SignUpModalProps) {
     return (
-        <Dialog.Root>
+        <Dialog.Root open={isModalOpen} onOpenChange={onOpenChange}>
             <Dialog.Trigger asChild>
                 <Button variant="white">
                     Criar conta
@@ -36,7 +41,7 @@ export function SignUpModal() {
 
                     <AuthOptionsContainer>
                         <li>
-                            <AuthOption href="#">
+                            <AuthOption onClick={() => signIn('google')}>
                                 <Image 
                                     src="/google-logo.svg" 
                                     alt="logo da google" 
@@ -49,7 +54,7 @@ export function SignUpModal() {
                         </li>
 
                         <li>
-                            <AuthOption href="#">
+                            <AuthOption onClick={() => signIn('discord')}>
                                 <Image 
                                     src="/discord-logo.svg" 
                                     alt="logo do discord" 
@@ -62,7 +67,7 @@ export function SignUpModal() {
                         </li>
 
                         <li>
-                            <AuthOption href="#">
+                            <AuthOption onClick={() => signIn('spotify')}>
                                 <Image 
                                     src="/spotify-logo.svg" 
                                     alt="logo do spotify" 
@@ -74,10 +79,6 @@ export function SignUpModal() {
                             </AuthOption>
                         </li>
                     </AuthOptionsContainer>
-
-                    <Separator>Ou</Separator>
-                    
-                    <Button variant="purple" className="signup-btn">Entre</Button>
                 </ModalContent>
             </Dialog.Portal>
         </Dialog.Root>

@@ -6,9 +6,9 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     variant: 'purple' | 'white'
 }
 
-export function Button({ label, variant }: ButtonProps) {
+export function Button({ label, variant, ...rest }: ButtonProps) {
     return (
-        <ButtonContainer variant={variant}>
+        <ButtonContainer variant={variant} {...rest}>
             {label}
         </ButtonContainer>
     )

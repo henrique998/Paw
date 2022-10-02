@@ -1,7 +1,5 @@
 import styled, { css } from "styled-components";
 import * as Dialog from "@radix-ui/react-dialog";
-import Link from "next/link";
-
 
 export const LandingHeader = styled.header`
     height: 4.375rem;
@@ -102,6 +100,7 @@ export const ModalOverlay = styled(Dialog.Overlay)`
 export const ModalContent = styled(Dialog.Content)`
     max-width: 25rem;
     width: 100%;
+    height: 31.25rem;
     background-color: ${props => props.theme.white};
     border-radius: 8px;
     padding: 0.75rem 1.5rem 1.5rem 1.5rem;
@@ -128,10 +127,6 @@ export const ModalContent = styled(Dialog.Content)`
         }
     }
 
-    .signup-btn {
-        width: 100%;
-        height: 2.5rem;
-    }
 `
 
 export const ModalTitle = styled(Dialog.Title)`
@@ -153,6 +148,20 @@ export const ModalDescription = styled(Dialog.Description)`
     color: ${props => props.theme["base-text-2"]};
 `
 
+export const AvatarContainer = styled.div`
+    img {
+        width: 2.5rem;
+        height: 2.5rem;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 3px solid ${props => props.theme["base-brand"]};
+    }
+
+    @media (max-width: 414px) {
+        display: none;
+    }
+`
+
 export const AuthOptionsContainer = styled.ul`
     margin-top: 2.5rem;
 
@@ -160,8 +169,9 @@ export const AuthOptionsContainer = styled.ul`
     gap: 1rem;
 `
 
-export const AuthOption = styled.a`
+export const AuthOption = styled.button`
     height: 2.5rem;
+    width: 100%;
     border: 1px solid ${props => props.theme["base-border"]};
     border-radius: 6px;
     background-color: ${props => props.theme.white};

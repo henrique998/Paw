@@ -2,32 +2,42 @@ import Link from "next/link"
 import Image from "next/future/image"
 import { useRouter } from "next/router"
 import { ReactNode } from "react"
+import { useSession } from "next-auth/react"
 import { Note, Star } from "phosphor-react"
-import * as Dialog from "@radix-ui/react-dialog";
 
+import { BottomBarProfile } from "../../components/BottomBarProfile"
+import { HeaderProfile } from "../../components/HeaderProfile"
 import { NavLink } from "../../components/NavLink"
-import { HeaderProfileBox } from "./components/HeaderProfileBox"
 
 import { BlogHeader, BlogHeaderContainer, BottomBarMenu, Nav, OptionContainer } from "./styles"
-import { BottomProfileBox } from "./components/BottomProfileBox"
 
 interface BlogLayoutProps {
     children: ReactNode
 }
 
 export function BlogLayout({ children }: BlogLayoutProps) {
-   const { pathname } = useRouter()
+    const { data } = useSession()
+    const { pathname } = useRouter()
 
-   const isIconActive = (path: string) => {
+    const isIconActive = (path: string) => {
         return pathname === path
-   }
+    }
 
     return (
         <>
             <BlogHeader>
                 <BlogHeaderContainer>
                     <div className="header-left">
-                        <Image src="/Logo.svg" alt="" width={76} height={42} />
+                        <Link href="/">
+                            <a>
+                                <Image 
+                                    src="/Logo.svg" 
+                                    alt="" 
+                                    width={76} 
+                                    height={42} 
+                                />
+                            </a>
+                        </Link>
 
                         <Nav>
                             <ul>
@@ -38,22 +48,9 @@ export function BlogLayout({ children }: BlogLayoutProps) {
                     </div>
 
                     <div className="header-right">
-                        <span>Olá, <strong>Rafaela</strong></span>
+                        <span>Olá, <strong>{data?.user?.name}</strong></span>
 
-                        <div className="profile">
-                            <Dialog.Root>
-                                <Dialog.Trigger>
-                                    <Image 
-                                        src="/woman-02.png" 
-                                        alt="" 
-                                        width={120} 
-                                        height={120} 
-                                    />
-                                </Dialog.Trigger>
-                                
-                                <HeaderProfileBox />
-                            </Dialog.Root>
-                        </div> 
+                        <HeaderProfile />
                     </div>
                 </BlogHeaderContainer>
             </BlogHeader>
@@ -85,18 +82,7 @@ export function BlogLayout({ children }: BlogLayoutProps) {
                     </OptionContainer>
 
                     <li>
-                        <Dialog.Root>
-                            <BottomProfileBox />
-
-                            <Dialog.Trigger>
-                                <Image 
-                                    src="/woman-02.png" 
-                                    alt="sua foto" 
-                                    width={120} 
-                                    height={120} 
-                                />
-                            </Dialog.Trigger>
-                        </Dialog.Root>
+                        <BottomBarProfile />
                     </li>
                 </ul>
             </BottomBarMenu>

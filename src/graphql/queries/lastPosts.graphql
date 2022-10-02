@@ -1,0 +1,11 @@
+query GetLastPosts {
+  posts(orderBy: publishedAt_DESC) {
+    id
+    banner {
+      url
+    }
+    title
+    excerpt
+    slug
+  }
+}

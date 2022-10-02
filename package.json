@@ -6,20 +6,32 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.0.0",
     "@radix-ui/react-switch": "^1.0.0",
+    "date-fns": "^2.29.3",
+    "faunadb": "^4.7.0",
     "framer-motion": "^7.5.0",
-    "keen-slider": "^6.8.2",
+    "graphql": "^16.6.0",
     "next": "12.3.1",
+    "next-auth": "^4.12.2",
+    "nookies": "^2.5.2",
     "phosphor-react": "^1.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.5",
+    "urql": "^3.0.3"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^2.13.1",
+    "@graphql-codegen/import-types-preset": "^2.2.3",
+    "@graphql-codegen/typescript": "^2.7.3",
+    "@graphql-codegen/typescript-operations": "^2.5.3",
+    "@graphql-codegen/typescript-urql": "^3.7.0",
+    "@types/next-auth": "^3.15.0",
     "@types/node": "18.7.23",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",

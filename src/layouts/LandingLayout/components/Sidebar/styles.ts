@@ -71,3 +71,19 @@ export const ButtonsContainer = styled.div`
         height: 3.75rem;
     }
 `
+
+export const AvatarContainer = styled.div`
+    max-width: 16.5rem;
+
+    margin-top: 6.25rem;
+    margin-left: auto;
+    margin-right: auto;
+
+    img {
+        width: 3rem;
+        height: 3rem;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 3px solid ${props => props.theme["base-brand"]};
+    }
+`

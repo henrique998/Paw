@@ -11,6 +11,7 @@ export const PostCardContainer = styled.div`
         width: 19.25rem;
         height: 10.75rem;
         border-radius: 12px;
+        object-fit: cover;
     }
 
     h2 {

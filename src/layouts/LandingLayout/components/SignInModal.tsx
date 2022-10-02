@@ -1,12 +1,27 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import Image from "next/future/image";
 import { XCircle } from "phosphor-react";
-import { AuthOption, AuthOptionsContainer, Button, ModalContent, ModalDescription, ModalOverlay, ModalTitle, Separator } from "../styles";
+import { signIn } from "next-auth/react";
+
+import { 
+    AuthOption, 
+    AuthOptionsContainer, 
+    Button, 
+    ModalContent, 
+    ModalDescription, 
+    ModalOverlay, 
+    ModalTitle, 
+} from "../styles";
 
 
-export function SignInModal() {
+interface SignInModalProps {
+    isModalOpen: boolean
+    onOpenChange: () => void
+}
+
+export function SignInModal({ isModalOpen, onOpenChange }: SignInModalProps) {
     return (
-        <Dialog.Root>
+        <Dialog.Root open={isModalOpen} onOpenChange={onOpenChange}>
             <Dialog.Trigger asChild>
                 <Button variant="purple">
                     Entrar
@@ -35,7 +50,7 @@ export function SignInModal() {
 
                     <AuthOptionsContainer>
                         <li>
-                            <AuthOption href="#">
+                            <AuthOption onClick={() => signIn('google')}>
                                 <Image 
                                     src="/google-logo.svg" 
                                     alt="logo da google" 
@@ -48,7 +63,7 @@ export function SignInModal() {
                         </li>
 
                         <li>
-                            <AuthOption href="#">
+                            <AuthOption onClick={() => signIn('discord')}>
                                 <Image 
                                     src="/discord-logo.svg" 
                                     alt="logo do discord" 
@@ -61,7 +76,7 @@ export function SignInModal() {
                         </li>
 
                         <li>
-                            <AuthOption href="#">
+                            <AuthOption onClick={() => signIn('spotify')}>
                                 <Image 
                                     src="/spotify-logo.svg" 
                                     alt="logo do spotify" 
@@ -73,10 +88,6 @@ export function SignInModal() {
                             </AuthOption>
                         </li>
                     </AuthOptionsContainer>
-
-                    <Separator>Ou</Separator>
-                    
-                    <Button variant="white" className="signup-btn">Inscreva-se</Button>
                 </ModalContent>
             </Dialog.Portal>
         </Dialog.Root>
