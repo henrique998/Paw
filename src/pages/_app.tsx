@@ -1,5 +1,6 @@
 import type { AppProps } from 'next/app'
 import { SessionProvider } from "next-auth/react"
+import { Toaster } from 'react-hot-toast';
 import { GlobalStyle } from '../styles/global'
 import { Providers } from '../providers'
 import { motion } from 'framer-motion'
@@ -37,6 +38,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
       </UrlqlProvider>
 
       <GlobalStyle />
+      <Toaster />
     </Providers>
   )
 }

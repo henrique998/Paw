@@ -1,6 +1,6 @@
 import { GetServerSideProps } from "next";
 import Image from "next/future/image";
-import { Eye, Heart } from "phosphor-react";
+import { Heart } from "phosphor-react";
 import { format, parseISO } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { GetPostDocument, useGetPostQuery } from "../../graphql/generated/graphql";
@@ -16,20 +16,20 @@ import {
     PostContent, 
     PostHeading 
 } from "../../styles/pages/post";
+import { getSession } from "next-auth/react";
 
 interface PostProps {
     slug: string
 }
 
 export default function Post({ slug }: PostProps) {
-    const [{ data }] = useGetPostQuery({
+    const [{ data: postData }] = useGetPostQuery({
         variables: {
             slug
         }
     })
 
-    const post = data?.post
-    
+    const post = postData?.post
     return (
         <BlogLayout>
             <PostContainer>
@@ -44,11 +44,6 @@ export default function Post({ slug }: PostProps) {
                     <h1>{post?.title}</h1>
 
                     <div className="post-info">
-                        <span>
-                            <Heart size={20} weight={'bold'} />
-                            32
-                        </span>
-
                         <time>
                             {format(parseISO(post?.publishedAt), "EEEE',' dd 'de' MMMM 'de' yyyy", {
                                 locale: ptBR
@@ -58,13 +53,9 @@ export default function Post({ slug }: PostProps) {
                 </PostHeading>
 
                 <div className="content">
-                    <aside>
-                        <LikeButton>
-                            <Heart size={24} />
-                        </LikeButton>
-                    </aside>
-
-                    <PostContent dangerouslySetInnerHTML={{ __html: post!.content.html }} />
+                    <PostContent 
+                        dangerouslySetInnerHTML={{ __html: post!.content.html }} 
+                    />
                 </div>
 
                 <MobileLikeButtonContainer>
@@ -91,9 +82,9 @@ export default function Post({ slug }: PostProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ params, req }) => {
-    const nextAuthToken = req.cookies['next-auth.session-token']
+    const isUserAuthenticated = await getSession({ req })
 
-    if (!nextAuthToken) {
+    if (!isUserAuthenticated) {
         return {
             redirect: {
                 destination: '/',

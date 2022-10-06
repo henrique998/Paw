@@ -1,5 +1,6 @@
 query GetPost($slug: String!) {
   post(where: {slug: $slug}) {
+    id
     title
     banner {
       url

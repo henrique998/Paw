@@ -10,6 +10,7 @@ import { HeaderProfile } from "../../components/HeaderProfile"
 import { NavLink } from "../../components/NavLink"
 
 import { BlogHeader, BlogHeaderContainer, BottomBarMenu, Nav, OptionContainer } from "./styles"
+import { MenuLinksList } from "./MenuLinksList"
 
 interface BlogLayoutProps {
     children: ReactNode
@@ -39,12 +40,7 @@ export function BlogLayout({ children }: BlogLayoutProps) {
                             </a>
                         </Link>
 
-                        <Nav>
-                            <ul>
-                                <NavLink path="/last-posts" label="Últimos posts" />
-                                <NavLink path="/most-popular" label="Mais Populares" />
-                            </ul>
-                        </Nav>
+                        <MenuLinksList />
                     </div>
 
                     <div className="header-right">

@@ -2,13 +2,13 @@ import Image from "next/future/image"
 import Link from "next/link"
 import { ReactNode, useState } from "react"
 import { useSession } from "next-auth/react"
-import { NavLink } from "../../components/NavLink"
 import { Sidebar } from "./components/Sidebar"
 import { SignInModal } from "./components/SignInModal"
 import { SignUpModal } from "./components/SignUpModal"
-import { AvatarContainer, LandingHeader, LandingHeaderContainer, ModalsContainer, Nav } from "./styles"
-import { MenuButton } from "./MenuButton"
+import { LandingHeader, LandingHeaderContainer, ModalsContainer } from "./styles"
+import { MenuButton } from "./components/MenuButton"
 import { HeaderProfile } from "../../components/HeaderProfile"
+import { MenuLinksList } from "./components/MenuLinksList"
 
 interface LandingLayoutProps {
   children: ReactNode
@@ -19,7 +19,7 @@ export function LandingLayout({ children }: LandingLayoutProps) {
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false)
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false)
 
-  const { status: sessionStatus, data: sessionData } = useSession()
+  const { status: sessionStatus } = useSession()
 
   function handleOpenSidebar() {
     setIsSidebarOpen(true)
@@ -48,17 +48,7 @@ export function LandingLayout({ children }: LandingLayoutProps) {
               </a>
             </Link>
 
-            <Nav>
-              <ul>
-                <NavLink path="/" label="Home" />
-                <NavLink path="/about" label="Sobre nós" />
-                <NavLink path="/categories" label="Categorias" />
-
-                {sessionStatus === 'authenticated' && (
-                  <NavLink path="/last-posts" label="Últimos posts" />
-                )}
-              </ul>
-            </Nav>
+            <MenuLinksList />
 
             <MenuButton onOpen={handleOpenSidebar} />
 

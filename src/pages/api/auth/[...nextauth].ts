@@ -22,7 +22,7 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async signIn({ user, account, profile }) {
-      const { email } = user
+      const { email } = user;
 
       try {
         await fauna.query(
@@ -31,31 +31,29 @@ export const authOptions: NextAuthOptions = {
               q.Exists(
                 q.Match(
                   q.Index('user_by_email'),
-                  q.Casefold(user.email ?? ""),
-                ),
+                  q.Casefold(user.email as string)
+                )
               )
             ),
             q.Create(
               q.Collection('users'),
-              {
-                data: { email }
-              }
+              { data: { email } }
             ),
             q.Get(
               q.Match(
                 q.Index('user_by_email'),
-                q.Casefold(user.email ?? "")
+                q.Casefold(user.email as string)
               )
             )
           )
-        )
+        );
 
-  
-        return true
+        return true;
       } catch {
-        return false
+        return true;
       }
-    },
+      
+    }
   }
 }
 

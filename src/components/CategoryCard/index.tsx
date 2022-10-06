@@ -6,7 +6,7 @@ interface CategorieCardProps {
     label: string
 }
 
-export function CategorieCard({ src, label }: CategorieCardProps) {
+export function CategoryCard({ src, label }: CategorieCardProps) {
     return (
         <CategorieCardContainer>
             <Image src={src} alt="" width={600} height={600} />

@@ -1,4 +1,4 @@
-import { CategorieCard } from "../components/CategorieCard";
+import { CategoryCard } from "../components/CategoryCard";
 import { LandingLayout } from "../layouts/LandingLayout";
 import { CategoriesContainer, CategoriesHeading, CategoriesList } from "../styles/pages/categories";
 
@@ -15,42 +15,42 @@ export default function Categories() {
                 <section>
                     <CategoriesList>
                         <li>
-                            <CategorieCard 
+                            <CategoryCard 
                                 src="/ilustrations/can-food.svg" 
                                 label="Comida" 
                             />
                         </li>
 
                         <li>
-                            <CategorieCard 
+                            <CategoryCard 
                                 src="/ilustrations/bed.svg" 
                                 label="Sono" 
                             />
                         </li>
 
                         <li>
-                            <CategorieCard 
+                            <CategoryCard 
                                 src="/ilustrations/collar.svg" 
                                 label="Passeio" 
                             />
                         </li>
 
                         <li>
-                            <CategorieCard 
+                            <CategoryCard 
                                 src="/ilustrations/travel-bag.svg" 
                                 label="Viagem" 
                             />
                         </li>
 
                         <li>
-                            <CategorieCard 
+                            <CategoryCard 
                                 src="/ilustrations/bath.svg" 
                                 label="Banho" 
                             />
                         </li>
 
                         <li>
-                            <CategorieCard 
+                            <CategoryCard 
                                 src="/ilustrations/toys.svg" 
                                 label="Brincadeiras" 
                             />

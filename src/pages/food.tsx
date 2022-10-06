@@ -1,32 +1,36 @@
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import { PostCard } from "../components/PostCard";
-import { GetLastPostsDocument, useGetLastPostsQuery } from "../graphql/generated/graphql";
+import { GetPostsByCategoryDocument, useGetPostsByCategoryQuery } from "../graphql/generated/graphql";
 import { BlogLayout } from "../layouts/BlogLayout";
 import { client, ssrCache } from "../libs/urql";
-import { LastPostsContainer, LastPostsHeading, PostsList } from "../styles/pages/last-posts";
+import { PostsList } from "../styles/pages/last-posts";
+import { MostPopularContainer, MostPopularHeading } from "../styles/pages/most-popular";
 
-export default function LastPosts() {
-    const [{ data }] = useGetLastPostsQuery()
+export default function Food() {
+    const [{ data }] = useGetPostsByCategoryQuery({
+        variables: {
+            categoryName: "food"
+        }
+    })
 
     return (
         <BlogLayout>
-            <LastPostsContainer>
-                <LastPostsHeading>
-                    <h1>Acompanhe os nossos últimos <span>artigos.</span></h1>
+            <MostPopularContainer>
+                <MostPopularHeading>
+                    <h1>Descubra as melhores dicas sobre <span>alimentação.</span></h1>
 
                     <p>
-                        Publicamos artigos todos os dias para ajudar você a cuidar melhor 
-                        dos nossos amiguinhos de 4 patas.
+                        Saiba como preparar refeições deliciosas para o seu doguinho. 
                     </p>
-                </LastPostsHeading>
+                </MostPopularHeading>
 
                 <section>
                     <PostsList>
                         {data?.posts.map(post => (
                             <li key={post.id}>
-                                <PostCard  
-                                    banner={post?.banner?.url ?? ""}
+                                <PostCard 
+                                    banner={post.banner.url}  
                                     title={post.title}
                                     excerpt={post.excerpt}
                                     slug={post.slug}
@@ -35,7 +39,7 @@ export default function LastPosts() {
                         ))}
                     </PostsList>
                 </section>
-            </LastPostsContainer>
+            </MostPopularContainer>
         </BlogLayout>
     )
 }
@@ -52,7 +56,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
         }
     }
 
-    await client.query(GetLastPostsDocument, {}).toPromise()        
+    await client.query(GetPostsByCategoryDocument, {
+        categoryName: "food"
+    }).toPromise()        
 
     return {
         props: {

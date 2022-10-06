@@ -8,16 +8,11 @@ export const PostContainer = styled.main`
     }
 
     .content {
-        max-width: 74.375rem;
+        max-width: 64.375rem;
         margin-top: 4.75rem;
         margin-left: auto;
         margin-right: auto;
         padding: 0 1rem 1rem 1rem;
-
-        display: flex;
-        align-items: flex-start;
-        justify-content: center;
-        gap: 4rem;
     }
 
     @media (max-width: 414px) {
@@ -29,10 +24,6 @@ export const PostContainer = styled.main`
 
         .content {
             margin-top: 3.75rem;
-
-            aside {
-                display: none;
-            }
         }
     }
 `
@@ -112,6 +103,37 @@ export const PostContent = styled.article`
 
     p + p {
         margin-top: 1.25rem;
+    }
+
+    ol, ul {
+        margin-top: 1.25rem;
+        margin-left: 1rem;
+
+        li {
+            font-size: 1rem;
+            color: ${props => props.theme["base-text-2"]};
+            line-height: 1.25rem;
+        }
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        margin: 1.25rem 0;
+    }
+
+    img {
+        margin-bottom: 1.25rem;
+    }
+
+    a {
+        color: ${props => props.theme["base-brand"]};
+    }
+
+    @media (max-width: 414px) {
+        img {
+            width: 100%;
+            height: 276px;
+            object-fit: cover;
+        }
     }
 `
 

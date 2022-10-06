@@ -1,0 +1,11 @@
+query GetPostsByCategory($categoryName: String!) {
+  posts(where: {categories_some: {name: $categoryName}}){
+    id
+    banner {
+      url
+    }
+    title
+    excerpt
+    slug
+  }
+}

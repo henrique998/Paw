@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { MenuButtonContainer } from "./styles";
+import { MenuButtonContainer } from "../styles";
 
 interface MenuButtonProps {
     onOpen: () => void

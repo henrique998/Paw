@@ -1,5 +1,7 @@
+import axios from "axios";
 import Image from "next/future/image";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { Button } from "../components/Button";
 import { LandingLayout } from "../layouts/LandingLayout";
 
@@ -12,16 +14,37 @@ import {
 
 export default function Home() {
   const [email, setEmail] = useState('')
+  const [users, setUsers] = useState<any[]>([])
 
-  function handleSubscribeInNewsletter(e: FormEvent) {
+  async function handleSubscribeInNewsletter(e: FormEvent) {
     e.preventDefault()
 
-    if (email.trim() !== '') {
-      alert(email)
-    }
+    try {
+      if (email.trim() !== '') {
+        await axios.post('/api/newsletter', {
+          email
+        })
+      }
+  
+      setEmail('')
 
-    setEmail('')
+      toast.success('Cadastro realizado com sucesso!', {
+        position: "top-left"
+      })
+
+    } catch {
+      toast.success('Erro no cadastro!', {
+        position: 'top-left'
+      })
+    }
   }
+
+  useEffect(() => {
+    axios.get('/api/users')
+      .then(result => setUsers(result.data.result.data))
+  }, [])
+
+  const userCount = String(users.length).padStart(2, '0')
 
   return (
     <LandingLayout>
@@ -86,7 +109,7 @@ export default function Home() {
             </div>
 
             <div className="texts">
-              <strong>2500+</strong>
+              <strong>{userCount}</strong>
               
               <p>Inscritos consomem o nosso conteúdo</p>
             </div>
